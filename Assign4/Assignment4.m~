@@ -1,0 +1,43 @@
+%% 0 - Get Data
+cd ('~/Work/Netherlands/TUDelft/1_Courses/Sem2/ComputerVision/Assignments-Git/ComputerVision/Assign4')
+X = load('Xpoints.mat');
+Y = load('Ypoints.mat');
+
+X = X.pointsx; % 101 cameras, 215 columns
+Y = Y.pointsy;
+
+% tmp = load('measurement_matrix.txt')
+
+
+
+%% Step1 - Centering the data
+X1 = X - mean(X, 1);
+Y1 = Y - mean(Y, 1);
+
+data = [];
+for i=1:size(X1,1)
+    disp(i)
+    X1_row = X1(i,:);
+    Y1_row = Y1(i,:);
+    data = [data;X1_row;Y1_row];
+end
+
+%% Step2 - Decomposition
+[U,W,V] = svd(data);        % data = [202, 215]
+
+U3  = U(:,[1 2 3]);         % [202,3]
+W3  = W([1 2 3], [1 2 3]);  % [3,3]
+V3  = V(:,[1 2 3]);         % [215,3]
+
+%% Step3 - Computing M,S; D = M.S
+M = U3*(W3^0.5);            % [202, 3]
+S = (W3^0.5)*V3';           % [3, 215]
+save('M', 'M');
+
+%% Step4 - Uniqueness in D = M.S
+A1 = M(1:2, : i*2, : ); 
+    L0 = pinv(Ai' * Ai);
+    L  = lsqonlin(@residuals_template, L0);
+    C  = chol(L, 'lower');
+    
+end

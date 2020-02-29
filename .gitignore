@@ -1,0 +1,13 @@
+*.zip
+vlfeat-0.9.21/*
+*.sift.params
+*.sift
+*.JPG
+*.png
+*.mat
+*.jpg
+*.eps
+*.txt
+*modelCastle_features/*
+*extract_features/*
+*template_code/*
